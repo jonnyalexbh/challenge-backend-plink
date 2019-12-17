@@ -8,11 +8,11 @@ exports.createUser = user =>
       logger.info(`user with name ${user.name} created!`);
       return result;
     })
-    .catch(err => {
-      if (err.name === 'SequelizeUniqueConstraintError') {
+    .catch(error => {
+      if (error.name === 'SequelizeUniqueConstraintError') {
         logger.error('The user entered already exists');
-        throw errors.userExistError('the user entered already exists!');
+        throw errors.userExistError('The user entered already exists!');
       }
       logger.error(`Could not create user: ${user.name}`);
-      throw errors.databaseError(err.message);
+      throw errors.databaseError(error.message);
     });
