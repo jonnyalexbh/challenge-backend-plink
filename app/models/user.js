@@ -1,3 +1,6 @@
+const logger = require('../logger');
+const errors = require('../errors');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
@@ -30,5 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   );
+  User.getOne = userName =>
+    User.findOne({ where: { userName } }).catch(err => {
+      logger.error(err);
+      throw errors.databaseError(err);
+    });
   return User;
 };

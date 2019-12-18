@@ -39,6 +39,9 @@ const config = {
       header_name: 'authorization',
       secret: process.env.NODE_API_SESSION_SECRET
     },
+    jwt: {
+      secret_key: process.env.SECRET_KEY
+    },
     encryption: {
       salt_sync: process.env.BCRYPT_SALT
     },

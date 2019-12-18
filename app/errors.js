@@ -14,3 +14,6 @@ exports.userExistError = message => internalError(message, exports.USER_EXIST_ER
 
 exports.VALIDATION_ERROR = 'validation_error';
 exports.validationError = message => internalError(message, exports.VALIDATION_ERROR);
+
+exports.UNAUTHORIZED__ERROR = 'unauthorized_error';
+exports.unauthorizedError = message => internalError(message, exports.UNAUTHORIZED__ERROR);
