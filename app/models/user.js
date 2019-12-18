@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      preferredCurrency: {
+        type: DataTypes.ENUM,
+        values: ['EUR', 'USD', 'COP'],
+        allowNull: false
       }
     },
     {

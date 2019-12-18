@@ -3,8 +3,8 @@ const errors = require('../errors');
 const logger = require('../logger');
 const { encryptPassword } = require('../helpers');
 
-exports.createUser = ({ name, lastName, userName, password }) => {
-  const user = { name, lastName, userName, password: encryptPassword(password) };
+exports.createUser = ({ name, lastName, userName, password, preferredCurrency }) => {
+  const user = { name, lastName, userName, password: encryptPassword(password), preferredCurrency };
   return User.create(user)
     .then(result => {
       logger.info(`user with name ${user.name} created!`);

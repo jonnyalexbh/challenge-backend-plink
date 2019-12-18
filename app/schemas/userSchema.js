@@ -1,5 +1,5 @@
 const yup = require('yup');
-const { alphaNumRegex } = require('../constants');
+const { alphaNumRegex, enumCurrencyRegex } = require('../constants');
 
 exports.signUpSchema = yup.object().shape({
   name: yup.string().required('The name field is required.'),
@@ -9,5 +9,9 @@ exports.signUpSchema = yup.object().shape({
     .string()
     .required('The password field is required.')
     .min(8, 'The password must be at least 8')
-    .matches(alphaNumRegex, 'The password may only contain letters and numbers.')
+    .matches(alphaNumRegex, 'The password may only contain letters and numbers.'),
+  preferredCurrency: yup
+    .string()
+    .required('The preferredCurrency field is required.')
+    .matches(enumCurrencyRegex, 'The preferredCurrency format is invalid.')
 });

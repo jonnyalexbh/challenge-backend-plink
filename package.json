@@ -72,6 +72,7 @@
     "express": "^4.16.2",
     "express-wolox-logger": "1.1.0",
     "factory-girl": "^5.0.4",
+    "faker": "^4.1.0",
     "jwt-simple": "^0.5.1",
     "pg": "^7.4.1",
     "sequelize": "^5.21.3",
