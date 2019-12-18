@@ -39,6 +39,9 @@ const config = {
       header_name: 'authorization',
       secret: process.env.NODE_API_SESSION_SECRET
     },
+    encryption: {
+      salt_sync: process.env.BCRYPT_SALT
+    },
     headers: {
       apiDate: process.env.API_DATE || 'X-API-Date',
       packageVersion: process.env.PACKAGE_VERSION || 'X-Package-Version',
