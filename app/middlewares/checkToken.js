@@ -19,6 +19,7 @@ exports.checkToken = async (req, res, next) => {
   }
 
   req.body.userId = user.id;
+  req.body.preferredCurrency = user.preferredCurrency;
 
   return next();
 };

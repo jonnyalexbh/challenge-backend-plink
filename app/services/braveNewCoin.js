@@ -23,3 +23,17 @@ exports.checkCryptoCurrency = ({ currency }) => {
       throw err;
     });
 };
+
+exports.getCurrency = (coin, preferredCurrency) => {
+  const uri = `${braveUri}/ticker`;
+  return requestApi({
+    method: 'GET',
+    uri,
+    headers: { 'x-rapidapi-host': braveApiHost, 'x-rapidapi-key': braveApiKey },
+    qs: {
+      coin,
+      show: preferredCurrency
+    },
+    json: true
+  });
+};

@@ -14,7 +14,8 @@ exports.requestApi = options => {
 exports.generateToken = user => {
   const tokenPayload = {
     id: user.id,
-    name: user.name
+    name: user.name,
+    preferredCurrency: user.preferredCurrency
   };
 
   const currentDate = new Date();
