@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       throw errors.databaseError(error);
     });
 
-  CryptoCurrencies.getAll = userId =>
+  CryptoCurrencies.getByUserId = userId =>
     CryptoCurrencies.findAll({ where: { userId } }).catch(err => {
       logger.error(err);
       throw errors.databaseError(err);
