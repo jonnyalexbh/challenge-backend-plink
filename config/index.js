@@ -39,8 +39,14 @@ const config = {
       header_name: 'authorization',
       secret: process.env.NODE_API_SESSION_SECRET
     },
+    braveNewCoinApi: {
+      braveUri: process.env.BRAVENEWCOIN_URI,
+      braveApiHost: process.env.BREAVE_API_HOST,
+      braveApiKey: process.env.BREAVE_API_KEY
+    },
     jwt: {
-      secret_key: process.env.SECRET_KEY
+      secret_key: process.env.SECRET_KEY,
+      expiresInMinutes: process.env.EXPIRE_JWT
     },
     encryption: {
       salt_sync: process.env.BCRYPT_SALT

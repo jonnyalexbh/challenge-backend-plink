@@ -33,10 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   );
+
   User.getOne = userName =>
     User.findOne({ where: { userName } }).catch(err => {
       logger.error(err);
       throw errors.databaseError(err);
     });
+
+  User.associate = models => User.hasMany(models.CryptoCurrencies);
+
   return User;
 };

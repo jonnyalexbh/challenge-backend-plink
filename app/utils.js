@@ -1,18 +1,24 @@
 const jwt = require('jwt-simple');
+const request = require('request-promise');
 const config = require('../config/index');
 const logger = require('./logger');
 const errors = require('./errors');
 
-const { secret_key } = config.common.jwt;
+const { secret_key, expiresInMinutes } = config.common.jwt;
+
+exports.requestApi = options => {
+  logger.info(`External Request ${options.method || 'GET'} [${options.uri}]`);
+  return request(options);
+};
 
 exports.generateToken = user => {
   const tokenPayload = {
-    lastName: user.lastName,
+    id: user.id,
     name: user.name
   };
 
   const currentDate = new Date();
-  currentDate.setMinutes(currentDate.getMinutes() + 1);
+  currentDate.setMinutes(currentDate.getMinutes() + parseInt(expiresInMinutes));
   tokenPayload.expiresIn = currentDate.getTime();
 
   return jwt.encode(tokenPayload, secret_key);

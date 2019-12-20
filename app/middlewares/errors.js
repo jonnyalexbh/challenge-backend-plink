@@ -6,7 +6,7 @@ const DEFAULT_STATUS_CODE = 500;
 const statusCodes = {
   [errors.VALIDATION_ERROR]: 400,
   [errors.UNAUTHORIZED__ERROR]: 401,
-  [errors.USER_EXIST_ERROR]: 422,
+  [errors.RESOURCE_EXIST_ERROR]: 422,
   [errors.DATABASE_ERROR]: 503,
   [errors.DEFAULT_ERROR]: 500
 };

@@ -14,7 +14,7 @@ exports.createUser = ({ name, lastName, userName, password, preferredCurrency })
     .catch(error => {
       if (error.name === 'SequelizeUniqueConstraintError') {
         logger.error('The user entered already exists');
-        throw errors.userExistError('The user entered already exists!');
+        throw errors.resourceExistError('The user entered already exists!');
       }
       logger.error(`Could not create user: ${user.name}`);
       throw errors.databaseError(error.message);
