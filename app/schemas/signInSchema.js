@@ -1,6 +1,6 @@
 const yup = require('yup');
 
-exports.loginSchema = yup.object().shape({
+exports.signInSchema = yup.object().shape({
   userName: yup.string().required('The userName field is required.'),
   password: yup.string().required('The password field is required.')
 });

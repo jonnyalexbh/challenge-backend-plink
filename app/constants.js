@@ -1,5 +1,5 @@
 exports.alphaNumRegex = /^[a-zA-Z0-9_]*$/;
-exports.enumCurrencyRegex = /USD|EUR|COP/;
+exports.enumCoinRegex = /USD|EUR|COP/;
 exports.MAP_ORDER = { DESC: -1, ASC: 1 };
 
 exports.SLICE_START = 0;

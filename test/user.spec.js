@@ -3,10 +3,10 @@ const app = require('../app');
 
 const { user } = require('./factory/user');
 
-describe('User Creation', () => {
+describe('Sign Up Creation', () => {
   it('should create an user successfuly', async done => {
     const res = await request(app)
-      .post('/users/create')
+      .post('/users/sign-up')
       .send(user);
     expect(res.status).toEqual(201);
     expect(res.body.userName).toEqual(user.userName);
@@ -14,7 +14,7 @@ describe('User Creation', () => {
   });
   it('should fail creation of user because for password requirements', done =>
     request(app)
-      .post('/users/create')
+      .post('/users/sign-up')
       .send({ ...user, password: '123456' })
       .then(res => {
         expect(res.status).toEqual(400);
@@ -24,11 +24,11 @@ describe('User Creation', () => {
       }));
   it('should fail creation of user when the userName exists in the database', done =>
     request(app)
-      .post('/users/create')
+      .post('/users/sign-up')
       .send({ ...user, userName: 'jonnyalexbh' })
       .then(() => {
         request(app)
-          .post('/users/create')
+          .post('/users/sign-up')
           .send({ ...user, userName: 'jonnyalexbh' })
           .then(res => {
             expect(res.status).toEqual(422);
@@ -38,7 +38,7 @@ describe('User Creation', () => {
       }));
   it('should fail when the last name is empty', done =>
     request(app)
-      .post('/users/create')
+      .post('/users/sign-up')
       .send({ ...user, lastName: '' })
       .then(res => {
         expect(res.status).toEqual(400);

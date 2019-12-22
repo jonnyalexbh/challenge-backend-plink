@@ -15,7 +15,7 @@ exports.generateToken = user => {
   const tokenPayload = {
     id: user.id,
     name: user.name,
-    preferredCurrency: user.preferredCurrency
+    preferredCoin: user.preferredCoin
   };
 
   const currentDate = new Date();

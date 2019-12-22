@@ -1,23 +1,22 @@
-const {
-  addCryptocurrencies,
-  getCryptocurrenciesUser,
-  getCryptocurrenciesUserTop
-} = require('../services/cryptocurrencies');
+const serviceCoin = require('../services/cryptocurrencies');
 
-exports.createCryptocurrencies = (req, res, next) => {
-  addCryptocurrencies(req.body)
+exports.createCoin = (req, res, next) => {
+  serviceCoin
+    .createCoin(req.body)
     .then(result => res.status(201).send(result))
     .catch(next);
 };
 
-exports.cryptocurrenciesList = (req, res, next) => {
-  getCryptocurrenciesUser(req.body)
-    .then(result => res.status(201).send(result))
+exports.coinsByUser = (req, res, next) => {
+  serviceCoin
+    .getCoinsByUser(req.body)
+    .then(result => res.status(200).send(result))
     .catch(next);
 };
 
-exports.topCryptocurrencies = (req, res, next) => {
-  getCryptocurrenciesUserTop(req.body)
-    .then(result => res.status(201).send(result))
+exports.coinsByUsertop = (req, res, next) => {
+  serviceCoin
+    .getCoinsByUserTop(req.body)
+    .then(result => res.status(200).send(result))
     .catch(next);
 };

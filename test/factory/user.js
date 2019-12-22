@@ -5,5 +5,5 @@ exports.user = {
   lastName: faker.name.lastName(),
   userName: faker.internet.userName(),
   password: faker.random.alphaNumeric(10),
-  preferredCurrency: faker.random.arrayElement(['USD', 'EUR', 'COP'])
+  preferredCoin: faker.random.arrayElement(['USD', 'EUR', 'COP'])
 };

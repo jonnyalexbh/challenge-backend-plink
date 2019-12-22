@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
-      currency: {
+      coin: {
         type: Sequelize.STRING,
         primaryKey: true
       },

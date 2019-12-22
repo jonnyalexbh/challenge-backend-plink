@@ -24,7 +24,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      preferred_currency: {
+      preferred_coin: {
         type: Sequelize.ENUM,
         values: ['EUR', 'USD', 'COP'],
         allowNull: false

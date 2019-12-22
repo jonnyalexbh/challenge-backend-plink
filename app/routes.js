@@ -1,19 +1,15 @@
 const { healthCheck } = require('./controllers/healthCheck');
-const { signUp, authenticate } = require('./controllers/users');
-const {
-  createCryptocurrencies,
-  cryptocurrenciesList,
-  topCryptocurrencies
-} = require('./controllers/cryptocurrencies');
-const { signUpValidator, loginValidator } = require('./middlewares/users');
+const { signUp, signIn } = require('./controllers/users');
+const { createCoin, coinsByUser, coinsByUsertop } = require('./controllers/cryptocurrencies');
+const { signUpValidator, signInValidator } = require('./middlewares/users');
 const { checkToken } = require('./middlewares/checkToken');
-const { currencyAddValidator } = require('./middlewares/currency');
+const { coinValidator } = require('./middlewares/coin');
 
 exports.init = app => {
   app.get('/health', healthCheck);
-  app.post('/users/create', signUpValidator, signUp);
-  app.post('/users/authenticate', loginValidator, authenticate);
-  app.get('/users/cryptocurrencies', checkToken, cryptocurrenciesList);
-  app.get('/users/top-cryptocurrencies', checkToken, topCryptocurrencies);
-  app.post('/currency/add', [checkToken, currencyAddValidator], createCryptocurrencies);
+  app.post('/users/sign-up', signUpValidator, signUp);
+  app.post('/users/sign-in', signInValidator, signIn);
+  app.post('/users/cryptocurrencies/create', [checkToken, coinValidator], createCoin);
+  app.get('/users/cryptocurrencies', checkToken, coinsByUser);
+  app.get('/users/cryptocurrencies-top', checkToken, coinsByUsertop);
 };

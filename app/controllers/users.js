@@ -1,12 +1,14 @@
-const { createUser, login } = require('../services/user');
+const serviceUser = require('../services/user');
 
 exports.signUp = (req, res, next) =>
-  createUser(req.body)
+  serviceUser
+    .signUp(req.body)
     .then(result => res.status(201).send(result))
     .catch(next);
 
-exports.authenticate = (req, res, next) =>
-  login(req.body)
+exports.signIn = (req, res, next) =>
+  serviceUser
+    .signIn(req.body)
     .then(token => {
       res.status(200).send({ token });
     })

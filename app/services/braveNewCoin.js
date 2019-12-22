@@ -3,12 +3,15 @@ const errors = require('../errors');
 const { braveUri, braveApiHost, braveApiKey } = require('../../config').common.braveNewCoinApi;
 const { requestApi } = require('../utils');
 
-exports.checkCryptoCurrency = ({ currency }) => {
-  const uri = `${braveUri}/ticker?coin=${currency}`;
+exports.checkCoin = ({ coin }) => {
+  const uri = `${braveUri}/ticker`;
   return requestApi({
     method: 'GET',
     uri,
     headers: { 'x-rapidapi-host': braveApiHost, 'x-rapidapi-key': braveApiKey },
+    qs: {
+      coin
+    },
     json: true
   })
     .then(res => {
@@ -24,7 +27,7 @@ exports.checkCryptoCurrency = ({ currency }) => {
     });
 };
 
-exports.getCurrency = (coin, preferredCurrency) => {
+exports.getCoin = (coin, preferredCoin) => {
   const uri = `${braveUri}/ticker`;
   return requestApi({
     method: 'GET',
@@ -32,7 +35,7 @@ exports.getCurrency = (coin, preferredCurrency) => {
     headers: { 'x-rapidapi-host': braveApiHost, 'x-rapidapi-key': braveApiKey },
     qs: {
       coin,
-      show: preferredCurrency
+      show: preferredCoin
     },
     json: true
   });

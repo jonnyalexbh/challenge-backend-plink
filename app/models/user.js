@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      preferredCurrency: {
+      preferredCoin: {
         type: DataTypes.ENUM,
         values: ['EUR', 'USD', 'COP'],
         allowNull: false

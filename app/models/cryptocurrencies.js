@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   const CryptoCurrencies = sequelize.define(
     'CryptoCurrencies',
     {
-      currency: {
+      coin: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  CryptoCurrencies.createModel = userCrypto =>
-    CryptoCurrencies.create(userCrypto).catch(error => {
+  CryptoCurrencies.createModel = userCoin =>
+    CryptoCurrencies.create(userCoin).catch(error => {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        logger.error(`The user has already added this currency ${userCrypto.currency}`);
-        throw errors.resourceExistError(`The user has already added this currency ${userCrypto.currency}`);
+        logger.error(`The user has already added this coin ${userCoin.coin}`);
+        throw errors.resourceExistError(`The user has already added this coin ${userCoin.coin}`);
       }
       if (error.name === 'SequelizeForeignKeyConstraintError') {
         logger.error('The cryptocurrency cannot be inserted because the user does not exist');
@@ -43,5 +43,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
   CryptoCurrencies.associate = models => CryptoCurrencies.belongsTo(models.User, { foreignKey: 'userId' });
+
   return CryptoCurrencies;
 };

@@ -1,33 +1,33 @@
 const { CryptoCurrencies } = require('../models');
-const { checkCryptoCurrency, getCurrency } = require('../services/braveNewCoin');
-const { userCryptocurrencies } = require('../serializers/crypto_currencies');
+const { checkCoin, getCoin } = require('../services/braveNewCoin');
+const { userByCoins } = require('../serializers/coins');
 const { SLICE_START, SLICE_END, ORDER_FIELD_DEFAULT, SORT_ORDER_DEFAULT } = require('../constants');
 const logger = require('../logger');
 const { order } = require('../helpers');
 
-exports.addCryptocurrencies = crypto =>
-  checkCryptoCurrency(crypto)
-    .then(() => CryptoCurrencies.createModel(crypto))
+const getCoinsUser = async (userId, preferredCoin) => {
+  const coins = await CryptoCurrencies.getByUserId(userId);
+  const promisesCoins = coins.map(coin => getCoin(coin.coin, preferredCoin));
+  const coinsRensponse = await Promise.all(promisesCoins);
+  return coinsRensponse;
+};
+
+exports.createCoin = coin =>
+  checkCoin(coin)
+    .then(() => CryptoCurrencies.createModel(coin))
     .then(res => res)
     .catch(err => {
-      logger.error(`Could not create currency: ${crypto.currency}`);
+      logger.error(`Could not create coin: ${coin.coin}`);
       throw err;
     });
 
-const getCryptoUser = async (userId, preferredCurrency) => {
-  const currencies = await CryptoCurrencies.getByUserId(userId);
-  const promisesCurrencies = currencies.map(currency => getCurrency(currency.currency, preferredCurrency));
-  const currenciesRensponse = await Promise.all(promisesCurrencies);
-  return currenciesRensponse;
+exports.getCoinsByUser = async ({ userId, preferredCoin }) => {
+  const coins = await getCoinsUser(userId, preferredCoin);
+  return userByCoins(coins);
 };
 
-exports.getCryptocurrenciesUser = async ({ userId, preferredCurrency }) => {
-  const currencies = await getCryptoUser(userId, preferredCurrency);
-  return userCryptocurrencies(currencies);
-};
-
-exports.getCryptocurrenciesUserTop = async ({ userId, preferredCurrency }) => {
-  const currencies = await getCryptoUser(userId, preferredCurrency);
-  const orderCurrencies = order(currencies, ORDER_FIELD_DEFAULT, SORT_ORDER_DEFAULT);
-  return userCryptocurrencies(orderCurrencies).slice(SLICE_START, SLICE_END);
+exports.getCoinsByUserTop = async ({ userId, preferredCoin }) => {
+  const coins = await getCoinsUser(userId, preferredCoin);
+  const orderCoins = order(coins, ORDER_FIELD_DEFAULT, SORT_ORDER_DEFAULT);
+  return userByCoins(orderCoins).slice(SLICE_START, SLICE_END);
 };
