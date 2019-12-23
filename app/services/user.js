@@ -14,7 +14,7 @@ exports.signUp = ({ name, lastName, userName, password, preferredCoin }) => {
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError') {
         logger.error('The user entered already exists');
-        throw errors.resourceExistError('The user entered already exists!');
+        throw errors.conflictError('The user entered already exists!');
       }
       logger.error(`Could not create user: ${user.name}`);
       throw errors.databaseError(err.message);
@@ -22,7 +22,7 @@ exports.signUp = ({ name, lastName, userName, password, preferredCoin }) => {
 };
 
 exports.signIn = ({ userName, password }) =>
-  User.getOne(userName).then(result => {
+  User.getOneByUserName(userName).then(result => {
     logger.info(`trying to authenticate user ${userName}`);
     if (result && checkPassword(password, result.password)) {
       return generateToken(result);

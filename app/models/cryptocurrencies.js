@@ -24,13 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     CryptoCurrencies.create(userCoin).catch(error => {
       if (error.name === 'SequelizeUniqueConstraintError') {
         logger.error(`The user has already added this coin ${userCoin.coin}`);
-        throw errors.resourceExistError(`The user has already added this coin ${userCoin.coin}`);
+        throw errors.conflictError(`The user has already added this coin ${userCoin.coin}`);
       }
       if (error.name === 'SequelizeForeignKeyConstraintError') {
         logger.error('The cryptocurrency cannot be inserted because the user does not exist');
-        throw errors.resourceExistError(
-          'The cryptocurrency cannot be inserted because the user does not exist'
-        );
+        throw errors.conflictError('The cryptocurrency cannot be inserted because the user does not exist');
       }
       logger.error(error);
       throw errors.databaseError(error);

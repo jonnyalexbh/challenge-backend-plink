@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.getOne = userName =>
+  User.getOneByUserName = userName =>
     User.findOne({ where: { userName } }).catch(err => {
       logger.error(err);
       throw errors.databaseError(err);

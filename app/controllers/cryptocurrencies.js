@@ -14,7 +14,7 @@ exports.coinsByUser = (req, res, next) => {
     .catch(next);
 };
 
-exports.coinsByUsertop = (req, res, next) => {
+exports.coinsByUserTop = (req, res, next) => {
   serviceCoin
     .getCoinsByUserTop(req.body)
     .then(result => res.status(200).send(result))

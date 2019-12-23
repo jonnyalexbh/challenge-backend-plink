@@ -17,7 +17,7 @@ exports.checkCoin = ({ coin }) => {
     .then(res => {
       if (!res.success) {
         logger.error('cryptocurrency does not exist');
-        throw errors.resourceExistError('cryptocurrency does not exist');
+        throw errors.conflictError('cryptocurrency does not exist');
       }
       return true;
     })

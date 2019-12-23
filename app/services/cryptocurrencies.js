@@ -15,7 +15,6 @@ const getCoinsUser = async (userId, preferredCoin) => {
 exports.createCoin = coin =>
   checkCoin(coin)
     .then(() => CryptoCurrencies.createModel(coin))
-    .then(res => res)
     .catch(err => {
       logger.error(`Could not create coin: ${coin.coin}`);
       throw err;
